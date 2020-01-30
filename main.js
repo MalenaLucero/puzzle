@@ -9,6 +9,9 @@ let shuffledOrder
 let organizedPieces = {}
 
 const initialize = () =>{
+    const winningMessage = document.getElementById('winningMessage')
+    winningMessage.classList.replace('show', 'hide')
+    
     //separates pieces in three groups: corners, sides, center
     organizePieces()
 
@@ -28,6 +31,8 @@ const initialize = () =>{
         if(position !== ''){
             piece.style.backgroundImage = imageUrl
             piece.style.backgroundPosition = position
+        }else if(position === ''){
+            piece.style.backgroundImage = ''
         }
     })
     console.log(shuffledOrder)
@@ -49,10 +54,11 @@ const movePiece = (num) =>{
         arraymove(shuffledOrder,shuffledOrder.indexOf(clickedPiece.style.backgroundPosition), shuffledOrder.indexOf(''))
         //the '' element goes to the empty cell index
         arraymove(shuffledOrder, shuffledOrder.indexOf(''), emptyCell)
-
     }
-    console.log(shuffledOrder)
-    console.log(isSameArray())
+    if(isSameArray()){
+        const winningMessage = document.getElementById('winningMessage')
+        winningMessage.classList.replace('hide', 'show')
+    }
 }
 
 //shuffles an array

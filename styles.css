@@ -1,5 +1,7 @@
 .main-container{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
@@ -13,4 +15,18 @@
 
 .puzzle-container div{
     border: 2px solid white;
+}
+
+button{
+    width: 150px;
+    height: 50px;
+    margin-top: 30px;
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
 }
