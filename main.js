@@ -1,23 +1,23 @@
 const originalOrder = ['0% 0%','33.3% 0%', '66.6% 0%', '100% 0%',
                 '0% 33.3%', '33.3% 33.3%', '66.6% 33.3%', '100% 33.3%',
                 '0% 66.6%', '33.3% 66.6%', '66.6% 66.6%', '100% 66.6%',
-                '0% 100%', '33.3% 100%', '66.6% 100%', '']
-const cells = [...Array(16).keys()]                
+                '0% 100%', '33.3% 100%', '66.6% 100%', '']              
 const imageUrl = 'url("images/monks.jpg")'
 let emptyCell
-let shuffledOrder
+let shuffledOrder = []
 let organizedPieces = {}
 
 const initialize = () =>{
+    //hide 'you won!' message
     const winningMessage = document.getElementById('winningMessage')
     winningMessage.classList.replace('show', 'hide')
-    
+
     //separates pieces in three groups: corners, sides, center
     organizePieces()
 
-    //random number from 0 to 15. This is the white tile
+    //random number. This is the white tile
     //I took this function from Stackoverflow
-    emptyCell = Math.floor(Math.random() * 16)
+    emptyCell = Math.floor(Math.random() * originalOrder.length)
 
     //shuffles the original order of the tiles
     shuffledOrder = shuffle([...originalOrder])
@@ -26,14 +26,19 @@ const initialize = () =>{
     arraymove(shuffledOrder, shuffledOrder.indexOf(''), emptyCell)
 
     //each tile is given a portion of the main picture as background, except the white tile
+    const puzzleContainer = document.getElementById('puzzle-container')
+    puzzleContainer.innerHTML = ''
     shuffledOrder.forEach((position, index)=>{
-        const piece = document.getElementById(`piece${index}`)
+        const piece = document.createElement('div')
+        piece.id = `piece${index}`
+        piece.onclick = () => movePiece(index)
         if(position !== ''){
             piece.style.backgroundImage = imageUrl
             piece.style.backgroundPosition = position
         }else if(position === ''){
             piece.style.backgroundImage = ''
         }
+        puzzleContainer.appendChild(piece)
     })
     console.log(shuffledOrder)
 }
@@ -160,7 +165,6 @@ const isMovementAllowed = (num) =>{
                 if(emptyCell === num - width || emptyCell === num - 1) return true
         }
     }else if(sides.flat().includes(num)){
-        console.log(sides[0])
         if(sides[0].includes(num)){
             if(emptyCell === num - 1 || emptyCell === num + 1 || emptyCell === num + width) return true
         }else if(sides[1].includes(num)){
