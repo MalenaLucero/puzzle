@@ -3,7 +3,7 @@ const originalOrder = ['0% 0%','33.3% 0%', '66.6% 0%', '100% 0%',
                 '0% 66.6%', '33.3% 66.6%', '66.6% 66.6%', '100% 66.6%',
                 '0% 100%', '33.3% 100%', '66.6% 100%', '']              
 const imageUrl = 'url("images/monks.jpg")'
-let emptyCell
+let emptyCell = 16
 let shuffledOrder = []
 let organizedPieces = {}
 
@@ -17,10 +17,11 @@ const initialize = () =>{
 
     //random number. This is the white tile
     //I took this function from Stackoverflow
-    emptyCell = Math.floor(Math.random() * originalOrder.length)
+    //emptyCell = Math.floor(Math.random() * originalOrder.length)
 
     //shuffles the original order of the tiles
-    shuffledOrder = shuffle([...originalOrder])
+    //shuffledOrder = shuffle([...originalOrder])
+    shuffledOrder = originalOrder
 
     //moves the '' to the emptyCell index in shuffledOrder array
     arraymove(shuffledOrder, shuffledOrder.indexOf(''), emptyCell)
