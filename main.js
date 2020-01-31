@@ -18,7 +18,6 @@ const initialize = () =>{
     organizePieces()
 
     //random number. This is the white tile
-    //I took this function from Stackoverflow
     emptyCell = Math.floor(Math.random() * originalOrder.length)
 
     //shuffles the original order of the tiles
@@ -65,7 +64,6 @@ const fillOriginalOrder = () =>{
         }else{
             widthValues.push(`${value.toFixed(2)}%`)
         }
-        
     }
     
     //porcentages of the rows
@@ -88,12 +86,14 @@ const fillOriginalOrder = () =>{
         return arr
     }).flat()
 
+    //the last element of the array has no porcentages
     originalOrder[originalOrder.length - 1 ] = ''
 }
 
 //onclick of each tile. 'num' is the number of the tile
 const movePiece = num =>{
     const clickedPiece = document.getElementById(`piece${num}`)
+
     if(isMovementAllowed(num) && !isSameArray()){
         //the clicked tile becomes white
         clickedPiece.style.backgroundImage = ''
@@ -108,6 +108,7 @@ const movePiece = num =>{
         //the '' element goes to the empty cell index
         arraymove(shuffledOrder, shuffledOrder.indexOf(''), emptyCell)
     }
+
     if(isSameArray()){
         const winningMessage = document.getElementById('winningMessage')
         winningMessage.classList.replace('hide', 'show')
@@ -121,7 +122,7 @@ function shuffle(o) {
 	return o;
 }
 
-//replaces an element with another, both of which are part of the array
+//switches two elements in an array
 //I took this function from Stackoverflow
 function arraymove(arr, fromIndex, toIndex) {
     var element = arr[fromIndex];
@@ -129,7 +130,7 @@ function arraymove(arr, fromIndex, toIndex) {
     arr.splice(toIndex, 0, element);
 }
 
-//compares the original array with the rearranged array and checks if they are the same
+//compares the original array with the rearranged array
 const isSameArray = () =>{
     console.log(originalOrder)
     console.log(shuffledOrder)
@@ -165,7 +166,7 @@ const organizePieces = () =>{
     organizedPieces.center = center
 }
 
-//from an interval of integers, returns an array
+//from an interval of integers, it returns an array
 //from 0 and 3, it returns [1, 2]
 const arrayFromInterval = (start, end) =>{  
     let arr = []
@@ -200,9 +201,6 @@ const arrayOfCenterPieces = (width, height, bottomLeftCorner, bottomRightCorner)
 
 const isMovementAllowed = (num) =>{
     const {corners, sides, center} = organizedPieces
-    console.log(corners)
-    console.log(sides)
-    console.log(center)
     if(corners.includes(num)){
         switch(num){
             case corners[0]:
