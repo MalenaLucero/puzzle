@@ -21,7 +21,8 @@ const initialize = () =>{
     emptyCell = Math.floor(Math.random() * originalOrder.length)
 
     //shuffles the original order of the tiles
-    shuffledOrder = shuffle([...originalOrder])
+    //shuffledOrder = shuffle([...originalOrder])
+    shuffledOrder = originalOrder
 
     //moves -1 to the emptyCell index in shuffledOrder array
     arraymove(shuffledOrder, shuffledOrder.indexOf(-1), emptyCell)
