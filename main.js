@@ -23,8 +23,8 @@ const initialize = () =>{
     //shuffles the original order of the tiles
     shuffledOrder = shuffle([...originalOrder])
 
-    //moves the '' to the emptyCell index in shuffledOrder array
-    arraymove(shuffledOrder, shuffledOrder.indexOf(''), emptyCell)
+    //moves -1 to the emptyCell index in shuffledOrder array
+    arraymove(shuffledOrder, shuffledOrder.indexOf(-1), emptyCell)
 
     //each tile is given a portion of the main picture as background, except the white tile
     const puzzleContainer = document.getElementById('puzzle-container')
@@ -33,10 +33,10 @@ const initialize = () =>{
         const piece = document.createElement('div')
         piece.id = `piece${index}`
         piece.onclick = () => movePiece(index)
-        if(position !== ''){
+        if(position !== -1){
             piece.style.backgroundImage = imageUrl
             piece.style.backgroundPosition = position
-        }else if(position === ''){
+        }else{
             piece.style.backgroundImage = ''
         }
         puzzleContainer.appendChild(piece)
@@ -44,10 +44,12 @@ const initialize = () =>{
 }
 
 const getInputByUser = () =>{
-    const inputWidth = document.getElementById('width').value
-    width = parseInt(inputWidth)
-    const inputHeight = document.getElementById('height').value
-    height = parseInt(inputHeight)
+    const inputWidth = document.getElementById('width')
+    width = parseInt(inputWidth.value)
+    inputWidth.value = ''
+    const inputHeight = document.getElementById('height')
+    height = parseInt(inputHeight.value)
+    inputHeight.value = ''
     const puzzleContainer = document.getElementById('puzzle-container')
     puzzleContainer.style.gridTemplateColumns = `repeat(${width}, auto)`
     puzzleContainer.style.gridTemplateRows = `repeat(${height}, auto)`
@@ -86,14 +88,14 @@ const fillOriginalOrder = () =>{
         return arr
     }).flat()
 
-    //the last element of the array has no porcentages
-    originalOrder[originalOrder.length - 1 ] = ''
+    //the last element is maked with -1 (the white tile)
+    originalOrder[originalOrder.length - 1 ] = -1
 }
 
 //onclick of each tile. 'num' is the number of the tile
 const movePiece = num =>{
     const clickedPiece = document.getElementById(`piece${num}`)
-
+    
     if(isMovementAllowed(num) && !isSameArray()){
         //the clicked tile becomes white
         clickedPiece.style.backgroundImage = ''
@@ -104,9 +106,11 @@ const movePiece = num =>{
         //the number of the clicked tile becomes the empty cell
         emptyCell = num 
         //the porcentages change order in the shuffled array
-        arraymove(shuffledOrder,shuffledOrder.indexOf(clickedPiece.style.backgroundPosition), shuffledOrder.indexOf(''))
+        arraymove(shuffledOrder,shuffledOrder.indexOf(clickedPiece.style.backgroundPosition), shuffledOrder.indexOf(-1))
         //the '' element goes to the empty cell index
-        arraymove(shuffledOrder, shuffledOrder.indexOf(''), emptyCell)
+        arraymove(shuffledOrder, shuffledOrder.indexOf(-1), emptyCell)
+
+        console.log(shuffledOrder)
     }
 
     if(isSameArray()){
@@ -132,20 +136,10 @@ function arraymove(arr, fromIndex, toIndex) {
 
 //compares the original array with the rearranged array
 const isSameArray = () =>{
-    console.log(originalOrder)
-    console.log(shuffledOrder)
     const sharedValues = originalOrder.filter((value, index)=>{
-            if(value === '' && shuffledOrder[index] === ''){
-                return ' '
-            }else if(value === shuffledOrder[index]){
-                return value
-            }
+            if(value === shuffledOrder[index]) return value
     })
-    if(sharedValues.length === originalOrder.length){
-        return true
-    }else{
-        return false
-    }
+    if(sharedValues.length === originalOrder.length) return true
 }
 
 const organizePieces = () =>{

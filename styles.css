@@ -1,8 +1,19 @@
 body{
     margin: 0;
+    font-family:Arial;
+    background-color: #FCD7AD;
+}
+
+h1{
+    text-align: center;
+    color: #599bb3;
 }
 
 .main-container{
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,9 +33,36 @@ body{
 }
 
 button{
-    width: 150px;
-    height: 50px;
-    margin-top: 30px;
+    margin: 30px 0;
+    border:none;
+    box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+	background-color:#599bb3;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+
+.input-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input{
+    height: 20px;
+    width: 100px;
+    border: 1px solid #599bb3;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 18px;
 }
 
 .show{

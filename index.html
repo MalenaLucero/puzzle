@@ -9,15 +9,16 @@
     <script src="main.js" type="text/javascript"></script>
 </head>
 <body onload="initialize()">
+    <h1>Puzzle Challenge</h1>
     <div class="main-container">
-        <div>
-            <input id="width" placeholder="Width">
-            <input id="height" placeholder="Height">
-            <button type="button" onclick="getInputByUser()">New puzzle</button>
-        </div>
         <div id="puzzle-container" class="puzzle-container"></div>
         <div class="winning hide" id="winningMessage">You won!</div>
         <button type="button" onclick="initialize()">Shuffle</button>
+    </div>
+    <div class="input-container">
+        <input id="width" placeholder="Width">
+        <input id="height" placeholder="Height">
+        <button type="button" onclick="getInputByUser()">New puzzle</button>
     </div>
 </body>
 </html>
