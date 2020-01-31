@@ -21,8 +21,7 @@ const initialize = () =>{
     emptyCell = Math.floor(Math.random() * originalOrder.length)
 
     //shuffles the original order of the tiles
-    //shuffledOrder = shuffle([...originalOrder])
-    shuffledOrder = originalOrder
+    shuffledOrder = shuffle([...originalOrder])
 
     //moves -1 to the emptyCell index in shuffledOrder array
     arraymove(shuffledOrder, shuffledOrder.indexOf(-1), emptyCell)
@@ -47,14 +46,17 @@ const initialize = () =>{
 const getInputByUser = () =>{
     const inputWidth = document.getElementById('width')
     width = parseInt(inputWidth.value)
-    inputWidth.value = ''
     const inputHeight = document.getElementById('height')
     height = parseInt(inputHeight.value)
-    inputHeight.value = ''
-    const puzzleContainer = document.getElementById('puzzle-container')
-    puzzleContainer.style.gridTemplateColumns = `repeat(${width}, auto)`
-    puzzleContainer.style.gridTemplateRows = `repeat(${height}, auto)`
-    initialize()
+    if(width > 2 && height > 2){
+        inputWidth.value = ''
+        inputHeight.value = ''
+        const puzzleContainer = document.getElementById('puzzle-container')
+        puzzleContainer.style.gridTemplateColumns = `repeat(${width}, auto)`
+        puzzleContainer.style.gridTemplateRows = `repeat(${height}, auto)`
+        initialize()
+    }
+
 }
 
 const fillOriginalOrder = () =>{
