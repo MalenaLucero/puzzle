@@ -1,13 +1,15 @@
-const originalOrder = ['0% 0%','33.3% 0%', '66.6% 0%', '100% 0%',
-                '0% 33.3%', '33.3% 33.3%', '66.6% 33.3%', '100% 33.3%',
-                '0% 66.6%', '33.3% 66.6%', '66.6% 66.6%', '100% 66.6%',
-                '0% 100%', '33.3% 100%', '66.6% 100%', '']              
 const imageUrl = 'url("images/monks.jpg")'
-let emptyCell = 16
+let originalOrder = []
+let emptyCell
 let shuffledOrder = []
 let organizedPieces = {}
+const width = 4
+const height = 4
+
 
 const initialize = () =>{
+    fillOriginalOrder()
+
     //hide 'you won!' message
     const winningMessage = document.getElementById('winningMessage')
     winningMessage.classList.replace('show', 'hide')
@@ -17,11 +19,10 @@ const initialize = () =>{
 
     //random number. This is the white tile
     //I took this function from Stackoverflow
-    //emptyCell = Math.floor(Math.random() * originalOrder.length)
+    emptyCell = Math.floor(Math.random() * originalOrder.length)
 
     //shuffles the original order of the tiles
-    //shuffledOrder = shuffle([...originalOrder])
-    shuffledOrder = originalOrder
+    shuffledOrder = shuffle([...originalOrder])
 
     //moves the '' to the emptyCell index in shuffledOrder array
     arraymove(shuffledOrder, shuffledOrder.indexOf(''), emptyCell)
@@ -44,8 +45,33 @@ const initialize = () =>{
     console.log(shuffledOrder)
 }
 
+const fillOriginalOrder = () =>{
+    //porcentages of the columns
+    const widthValues = []
+    for(let i=0; i < width ; i++){
+        widthValues.push(`${(100/(width-1)*i).toFixed(2)}%`)
+    }
+    
+    //porcentages of the rows
+    const heightValues = []
+    for(let i=0; i < height ; i++){
+        heightValues.push(`${(100/(height-1)*i).toFixed(2)}%`)
+    }
+    
+    //combination of the two porcentages in one array
+    originalOrder = heightValues.map(height=>{
+        const arr = []
+        widthValues.forEach(width=>{
+            arr.push(`${width} ${height}`)
+        })
+        return arr
+    }).flat()
+
+    originalOrder[originalOrder.length - 1 ] = ''
+}
+
 //onclick of each tile. 'num' is the number of the tile
-const movePiece = (num) =>{
+const movePiece = num =>{
     const clickedPiece = document.getElementById(`piece${num}`)
     if(isMovementAllowed(num)){
         //the clicked tile becomes white
@@ -64,6 +90,10 @@ const movePiece = (num) =>{
     if(isSameArray()){
         const winningMessage = document.getElementById('winningMessage')
         winningMessage.classList.replace('hide', 'show')
+        shuffledOrder.forEach((position, index)=>{
+            const piece = document.getElementById(`piece${index}`) 
+            piece.onclick = () => movePiece(index)
+        })
     }
 }
 
