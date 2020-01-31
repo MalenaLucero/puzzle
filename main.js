@@ -3,8 +3,8 @@ let originalOrder = []
 let emptyCell
 let shuffledOrder = []
 let organizedPieces = {}
-const width = 4
-const height = 4
+let width = 4
+let height = 4
 
 
 const initialize = () =>{
@@ -42,20 +42,41 @@ const initialize = () =>{
         }
         puzzleContainer.appendChild(piece)
     })
-    console.log(shuffledOrder)
+}
+
+const getInputByUser = () =>{
+    const inputWidth = document.getElementById('width').value
+    width = parseInt(inputWidth)
+    const inputHeight = document.getElementById('height').value
+    height = parseInt(inputHeight)
+    const puzzleContainer = document.getElementById('puzzle-container')
+    puzzleContainer.style.gridTemplateColumns = `repeat(${width}, auto)`
+    puzzleContainer.style.gridTemplateRows = `repeat(${height}, auto)`
+    initialize()
 }
 
 const fillOriginalOrder = () =>{
     //porcentages of the columns
     const widthValues = []
     for(let i=0; i < width ; i++){
-        widthValues.push(`${(100/(width-1)*i).toFixed(2)}%`)
+        let value = 100/(width-1)*i
+        if(Number.isInteger(value)){
+            widthValues.push(`${value.toFixed()}%`)
+        }else{
+            widthValues.push(`${value.toFixed(2)}%`)
+        }
+        
     }
     
     //porcentages of the rows
     const heightValues = []
     for(let i=0; i < height ; i++){
-        heightValues.push(`${(100/(height-1)*i).toFixed(2)}%`)
+        let value = 100/(height-1)*i
+        if(Number.isInteger(value)){
+            heightValues.push(`${value.toFixed()}%`)
+        }else{
+            heightValues.push(`${value.toFixed(2)}%`)
+        }
     }
     
     //combination of the two porcentages in one array
@@ -73,7 +94,7 @@ const fillOriginalOrder = () =>{
 //onclick of each tile. 'num' is the number of the tile
 const movePiece = num =>{
     const clickedPiece = document.getElementById(`piece${num}`)
-    if(isMovementAllowed(num)){
+    if(isMovementAllowed(num) && !isSameArray()){
         //the clicked tile becomes white
         clickedPiece.style.backgroundImage = ''
         //the previous white tile gets an image
@@ -90,10 +111,6 @@ const movePiece = num =>{
     if(isSameArray()){
         const winningMessage = document.getElementById('winningMessage')
         winningMessage.classList.replace('hide', 'show')
-        shuffledOrder.forEach((position, index)=>{
-            const piece = document.getElementById(`piece${index}`) 
-            piece.onclick = () => movePiece(index)
-        })
     }
 }
 
@@ -114,6 +131,8 @@ function arraymove(arr, fromIndex, toIndex) {
 
 //compares the original array with the rearranged array and checks if they are the same
 const isSameArray = () =>{
+    console.log(originalOrder)
+    console.log(shuffledOrder)
     const sharedValues = originalOrder.filter((value, index)=>{
             if(value === '' && shuffledOrder[index] === ''){
                 return ' '
@@ -129,8 +148,6 @@ const isSameArray = () =>{
 }
 
 const organizePieces = () =>{
-    const width = 4
-    const height = 4
     //the four corners
     const topLeft = 0
     const topRight = width -1
@@ -183,7 +200,9 @@ const arrayOfCenterPieces = (width, height, bottomLeftCorner, bottomRightCorner)
 
 const isMovementAllowed = (num) =>{
     const {corners, sides, center} = organizedPieces
-    const width = 4
+    console.log(corners)
+    console.log(sides)
+    console.log(center)
     if(corners.includes(num)){
         switch(num){
             case corners[0]:
