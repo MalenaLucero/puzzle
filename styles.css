@@ -1,7 +1,7 @@
 body{
     margin: 0;
     font-family:Arial;
-    background-color: #FCD7AD;
+    background-color: rgb(255, 233, 208);
     width: 100%;
 }
 
@@ -50,7 +50,7 @@ button{
 	border-radius:8px;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
+	color:rgb(255, 233, 208);
 	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
@@ -63,6 +63,13 @@ button{
     button{
         font-size: 30px;
     }
+}
+
+.winning{
+    color: #599bb3;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
 }
 
 .input-container{

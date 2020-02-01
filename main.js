@@ -61,10 +61,10 @@ const showPicture = () =>{
 
 const getInputByUser = () =>{
     const inputWidth = document.getElementById('width')
-    width = parseInt(inputWidth.value)
     const inputHeight = document.getElementById('height')
-    height = parseInt(inputHeight.value)
-    if(width > 2 && height > 2){
+    if(parseInt(inputWidth.value) > 2 && parseInt(inputHeight.value) > 2){
+        width = parseInt(inputWidth.value)
+        height = parseInt(inputHeight.value)
         inputWidth.value = ''
         inputHeight.value = ''
         const puzzleContainer = document.getElementById('puzzle-container')
@@ -72,7 +72,6 @@ const getInputByUser = () =>{
         puzzleContainer.style.gridTemplateRows = `repeat(${height}, auto)`
         initialize()
     }
-
 }
 
 const fillOriginalOrder = () =>{
