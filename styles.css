@@ -38,8 +38,8 @@ h1{
 
 @media(max-width: 600px){
     .puzzle-container{
-        width: 400px;
-        height: 400px;
+        width: 350px;
+        height: 350px;
     }
 }
 
@@ -84,22 +84,20 @@ button{
     align-items: center;
 }
 
-
-
 input{
     height: 20px;
     width: 100px;
     border: 1px solid #599bb3;
-    padding: 10px;
+    padding: 10px 8px;
     margin-right: 10px;
     font-size: 18px;
 }
 
 @media(max-width: 600px){
     input{
-        font-size: 20px;
+        font-size: 15px;
         height: 30px;
-        width: 60px;
+        width: 45px;
     }
 }
 
