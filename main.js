@@ -1,4 +1,5 @@
-const imageUrl = 'url("images/monks.jpg")'
+const imageUrlDesktop = 'url("images/monks500px.jpg")'
+const imageUrlMobile = 'url("images/monks400px.jpg")'
 let originalOrder = []
 let emptyCell
 let shuffledOrder = []
@@ -9,7 +10,7 @@ let height = 4
 const initialize = () =>{
     fillOriginalOrder()
 
-    //hide 'you won!' message
+    //hide 'Congratuilations!' message
     const winningMessage = document.getElementById('winningMessage')
     winningMessage.classList.replace('show', 'hide')
 
@@ -33,8 +34,12 @@ const initialize = () =>{
         piece.id = `piece${index}`
         piece.onclick = () => movePiece(index)
         if(position !== -1){
-            piece.style.backgroundImage = imageUrl
             piece.style.backgroundPosition = position
+            if(window.innerWidth < 600){
+                piece.style.backgroundImage = imageUrlMobile
+            }else{
+                piece.style.backgroundImage = imageUrlDesktop
+            }
         }else{
             piece.style.backgroundImage = ''
         }
@@ -50,8 +55,12 @@ const showPicture = () =>{
         const piece = document.getElementById(`piece${index}`)
         piece.onclick = ''
         if(position !== -1){
-            piece.style.backgroundImage = imageUrl
             piece.style.backgroundPosition = position
+            if(window.innerWidth < 600){
+                piece.style.backgroundImage = imageUrlMobile
+            }else{
+                piece.style.backgroundImage = imageUrlDesktop
+            }
         }else{
             piece.style.backgroundImage = ''
         }
@@ -119,7 +128,11 @@ const movePiece = num =>{
         clickedPiece.style.backgroundImage = ''
         //the previous white tile gets an image
         const emptyPiece = document.getElementById(`piece${emptyCell}`)
-        emptyPiece.style.backgroundImage = imageUrl
+        if(window.innerWidth < 600){
+            emptyPiece.style.backgroundImage = imageUrlMobile
+        }else{
+            emptyPiece.style.backgroundImage = imageUrlDesktop
+        }
         emptyPiece.style.backgroundPosition = clickedPiece.style.backgroundPosition
         //the number of the clicked tile becomes the empty cell
         emptyCell = num 
