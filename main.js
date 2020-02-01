@@ -1,5 +1,5 @@
 const imageUrlDesktop = 'url("images/monks500px.jpg")'
-const imageUrlMobile = 'url("images/monks350px.jpg")'
+const imageUrlMobile = 'url("images/monks300px.jpg")'
 let originalOrder = []
 let emptyCell
 let shuffledOrder = []
