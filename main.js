@@ -6,7 +6,6 @@ let organizedPieces = {}
 let width = 4
 let height = 4
 
-
 const initialize = () =>{
     fillOriginalOrder()
 
@@ -41,6 +40,23 @@ const initialize = () =>{
         }
         puzzleContainer.appendChild(piece)
     })
+}
+
+//show the fulls picture with an empty cell at the end
+const showPicture = () =>{
+    shuffledOrder = [...originalOrder]
+    emptyCell = originalOrder.length
+    shuffledOrder.forEach((position, index)=>{
+        const piece = document.getElementById(`piece${index}`)
+        piece.onclick = ''
+        if(position !== -1){
+            piece.style.backgroundImage = imageUrl
+            piece.style.backgroundPosition = position
+        }else{
+            piece.style.backgroundImage = ''
+        }
+    })
+
 }
 
 const getInputByUser = () =>{

@@ -14,7 +14,7 @@ h1{
     h1{
         text-align: left;
         margin-left: 20px;
-        font-size: 45px;
+        font-size: 40px;
     }
 }
 
@@ -42,7 +42,7 @@ h1{
 }
 
 button{
-    margin: 30px 0;
+    margin: 30px 5px;
     border:none;
     box-shadow: 0px 10px 14px -7px #276873;
 	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
