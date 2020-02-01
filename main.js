@@ -10,7 +10,7 @@ let height = 4
 const initialize = () =>{
     fillOriginalOrder()
 
-    //hide 'Congratuilations!' message
+    //hide 'Congratulations!' message
     const winningMessage = document.getElementById('winningMessage')
     winningMessage.classList.replace('show', 'hide')
 
@@ -47,7 +47,7 @@ const initialize = () =>{
     })
 }
 
-//show the fulls picture with an empty cell at the end
+//shows the full picture with an empty cell at the end
 const showPicture = () =>{
     shuffledOrder = [...originalOrder]
     emptyCell = originalOrder.length
@@ -106,7 +106,7 @@ const fillOriginalOrder = () =>{
         }
     }
     
-    //combination of the two porcentages in one array
+    //combination of porcentages from columns and rows
     originalOrder = heightValues.map(height=>{
         const arr = []
         widthValues.forEach(width=>{
@@ -138,7 +138,7 @@ const movePiece = num =>{
         emptyCell = num 
         //the porcentages change order in the shuffled array
         arraymove(shuffledOrder,shuffledOrder.indexOf(clickedPiece.style.backgroundPosition), shuffledOrder.indexOf(-1))
-        //the '' element goes to the empty cell index
+        //-1 moves to the empty cell index
         arraymove(shuffledOrder, shuffledOrder.indexOf(-1), emptyCell)
 
         console.log(shuffledOrder)
@@ -192,7 +192,7 @@ const organizePieces = () =>{
 }
 
 //from an interval of integers, it returns an array
-//from 0 and 3, it returns [1, 2]
+//example: from 0 and 3, it returns [1, 2]
 const arrayFromInterval = (start, end) =>{  
     let arr = []
     for(let i=start+1; i<end; i++){
@@ -202,7 +202,7 @@ const arrayFromInterval = (start, end) =>{
 }
 
 //returns the numbers from the sides
-//in a 4x4 puzzle, with bottomCorner=12, it returns [4,8] (the left side numbers that are not corners)
+//example: in a 4x4 puzzle, with bottomCorner=12, it returns [4,8] (the left side numbers that are not corners)
 const arrayFromJumps = (width, height, bottomCorner) =>{
     const loops = height - 2
     let arr = []
