@@ -1,5 +1,5 @@
 # Puzzle
 
-Sliding puzzle with levels. Works also on mobile.
+Responsive sliding puzzle with levels made with Javascript, HTML and CSS.
 
-Hosted on Github Pages: https://malenalucero.github.io/puzzle/
+It's hosted on Github Pages: https://malenalucero.github.io/puzzle/
