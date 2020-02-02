@@ -10,9 +10,7 @@ let height = 4
 const initialize = () =>{
     fillOriginalOrder()
 
-    //hide 'Congratulations!' message
-    const winningMessage = document.getElementById('winningMessage')
-    winningMessage.classList.replace('show', 'hide')
+    showModal(false)
 
     //separates pieces in three groups: corners, sides, center
     organizePieces()
@@ -145,8 +143,7 @@ const movePiece = num =>{
     }
 
     if(isSameArray()){
-        const winningMessage = document.getElementById('winningMessage')
-        winningMessage.classList.replace('hide', 'show')
+        showModal(true)
     }
 }
 
@@ -250,4 +247,24 @@ const isMovementAllowed = (num) =>{
     }else if(center.includes(num)){
         if(emptyCell === num - width || emptyCell === num - 1 || emptyCell === num + 1 || emptyCell === num + width) return true
     }
+}
+
+const showModal = show =>{
+    const modal = document.getElementById('winningMessageModal')
+    if(show){
+       modal.classList.replace('inactive', 'active') 
+    }else{
+        modal.classList.replace('active', 'inactive')
+    }
+    
+}
+
+const nextLevel = () =>{
+    showModal(false)
+    width += 1
+    height += 1
+    const puzzleContainer = document.getElementById('puzzle-container')
+    puzzleContainer.style.gridTemplateColumns = `repeat(${width}, auto)`
+    puzzleContainer.style.gridTemplateRows = `repeat(${height}, auto)`
+    initialize()
 }

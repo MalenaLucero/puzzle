@@ -12,10 +12,13 @@
     <h1>Puzzle Challenge</h1>
     <div class="main-container">
         <div id="puzzle-container" class="puzzle-container"></div>
-        <div class="winning hide" id="winningMessage">Congratulations!</div>
         <div>
             <button type="button" onclick="showPicture()">Show picture</button>
             <button type="button" onclick="initialize()">Shuffle</button> 
+        </div>
+        <div id="winningMessageModal" class="winningMessageModal inactive">
+            <div class="winningMessage" id="winningMessage">Congratulations!</div>
+            <button type="button" onclick="nextLevel()">Next level</button>
         </div>
     </div>
     <div class="input-container">

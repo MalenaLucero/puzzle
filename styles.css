@@ -3,6 +3,7 @@ body{
     font-family:Arial;
     background-color: rgb(255, 233, 208);
     width: 100%;
+    
 }
 
 h1{
@@ -11,6 +12,7 @@ h1{
 }
 
 .main-container{
+    position: relative;
     width: 500px;
     margin: 0 auto;
     padding: 20px;
@@ -71,7 +73,32 @@ button{
     }
 }
 
-.winning{
+.winningMessageModal{
+    position: absolute;
+    background-color: rgb(255, 233, 208);
+    padding: 20px 40px;
+    border-radius:8px;
+    box-shadow: 0px 10px 14px -7px black;
+    text-align: center;
+}
+
+.inactive{
+    opacity: 0;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+
+.active{
+    opacity: 1;
+    z-index: 1;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.7s;
+}
+
+.winningMessage{
     color: #599bb3;
     font-size: 20px;
     font-weight: bold;
