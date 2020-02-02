@@ -1,16 +1,15 @@
 const imageUrlDesktop = 'url("images/monks500px.jpg")'
 const imageUrlMobile = 'url("images/monks300px.jpg")'
 let originalOrder = []
-let emptyCell
 let shuffledOrder = []
 let organizedPieces = {}
+let emptyCell
 let width = 4
 let height = 4
 
 const initialize = () =>{
-    fillOriginalOrder()
-
     showModal(false)
+    fillOriginalOrder()
 
     //separates pieces in three groups: corners, sides, center
     organizePieces()
@@ -24,9 +23,13 @@ const initialize = () =>{
     //moves -1 to the emptyCell index in shuffledOrder array
     arraymove(shuffledOrder, shuffledOrder.indexOf(-1), emptyCell)
 
-    //each tile is given a portion of the main picture as background, except the white tile
+    //grid of the html puzzle container
     const puzzleContainer = document.getElementById('puzzle-container')
     puzzleContainer.innerHTML = ''
+    puzzleContainer.style.gridTemplateColumns = `repeat(${width}, auto)`
+    puzzleContainer.style.gridTemplateRows = `repeat(${height}, auto)`
+
+    //each tile is given a portion of the main picture as background, except the white tile
     shuffledOrder.forEach((position, index)=>{
         const piece = document.createElement('div')
         piece.id = `piece${index}`
@@ -47,10 +50,12 @@ const initialize = () =>{
 
 //shows the full picture with an empty cell at the end
 const showPicture = () =>{
+    showModal(false)
     shuffledOrder = [...originalOrder]
     emptyCell = originalOrder.length
     shuffledOrder.forEach((position, index)=>{
         const piece = document.getElementById(`piece${index}`)
+        //the onclick is disabled when the full picture is shown
         piece.onclick = ''
         if(position !== -1){
             piece.style.backgroundPosition = position
@@ -74,9 +79,6 @@ const getInputByUser = () =>{
         height = parseInt(inputHeight.value)
         inputWidth.value = ''
         inputHeight.value = ''
-        const puzzleContainer = document.getElementById('puzzle-container')
-        puzzleContainer.style.gridTemplateColumns = `repeat(${width}, auto)`
-        puzzleContainer.style.gridTemplateRows = `repeat(${height}, auto)`
         initialize()
     }
 }
@@ -263,8 +265,5 @@ const nextLevel = () =>{
     showModal(false)
     width += 1
     height += 1
-    const puzzleContainer = document.getElementById('puzzle-container')
-    puzzleContainer.style.gridTemplateColumns = `repeat(${width}, auto)`
-    puzzleContainer.style.gridTemplateRows = `repeat(${height}, auto)`
     initialize()
 }
